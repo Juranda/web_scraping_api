@@ -1,0 +1,23 @@
+{
+  "name": "web_scraping_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "npx tsc -b && node --test",
+    "build": "rmdir ./dist && npx tsc -b",
+    "start": "npm run build && node dist/src/index.js",
+    "dev": "npm run start --watch"
+  },
+  "author": "Felipe Ribeiro",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^24.11.0",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@types/puppeteer": "^7.0.4",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "exclude": [
+    "./node_modules",
+    "*.d.ts",
+  ],
+  "compilerOptions": {
+    "module": "node16",
+    "esModuleInterop": true,
+    "target": "esnext",
+    "moduleResolution": "node16",
+    "outDir": "dist",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "skipDefaultLibCheck": true
+  },
+  "lib": [
+    "esnext",
+    "dom"
+  ],
+}
