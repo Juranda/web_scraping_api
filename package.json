@@ -6,17 +6,20 @@
   "type": "module",
   "scripts": {
     "test": "npx tsc -b && node --test",
-    "build": "rmdir ./dist && npx tsc -b",
-    "start": "npm run build && node dist/src/index.js",
-    "dev": "npm run start --watch"
+    "build": "tsc",
+    "start": "npx tsc -b && node dist/src/index.js",
+    "dev": "npx tsc -w && node --watch dist/src/index.js"
   },
   "author": "Felipe Ribeiro",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^24.0.10",
+    "express": "^5.1.0",
     "puppeteer": "^24.11.0",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
+    "@types/express": "^5.0.3",
     "@types/puppeteer": "^7.0.4",
     "typescript": "^5.8.3"
   }

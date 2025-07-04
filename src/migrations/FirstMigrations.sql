@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS noticias (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    data DATETIME NOT NULL,
+    titulo VARCHAR(255) NOT NULL,
+    descricao VARCHAR(1000) DEFAULT '',
+    url VARCHAR(255) NOT NULL,
+    origem VARCHAR(50) NOT NULL
+);
+
+CREATE INDEX IF NOT EXISTS data_origem ON noticias (origem, data);

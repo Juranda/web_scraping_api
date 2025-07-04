@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/models/noticia.ts","./src/repo/noticiasrepo.ts","./src/repo/noticiassqlliterepo.ts","./src/test/browser/page-utils.test.ts","./src/web_scrapping/banco_central.ts","./src/web_scrapping/page_utils.ts"],"version":"5.8.3"}

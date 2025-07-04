@@ -4,17 +4,21 @@
     "*.d.ts",
   ],
   "compilerOptions": {
-    "module": "node16",
+    "module": "nodenext",
     "esModuleInterop": true,
     "target": "esnext",
-    "moduleResolution": "node16",
+    "moduleResolution": "nodenext",
+    "rootDir": "src",
     "outDir": "dist",
     "skipLibCheck": true,
     "sourceMap": true,
-    "skipDefaultLibCheck": true
+    "skipDefaultLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
   },
-  "lib": [
-    "esnext",
-    "dom"
-  ],
 }
