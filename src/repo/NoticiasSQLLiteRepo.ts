@@ -24,7 +24,7 @@ export class NoticiasSQLLiteRepo implements NoticiasRepo {
                         WHERE DATA BETWEEN DATE('NOW', '-7 DAY') AND DATE('NOW') 
                         ORDER BY DATA DESC;`;
         
-        throw new Error("Método getNoticiasDaSemana não implementado. Favor implementar este método para buscar notícias da semana."); 
+        //throw new Error("Método getNoticiasDaSemana não implementado. Favor implementar este método para buscar notícias da semana."); 
 
         return new Promise<Noticia[]>((resolve, reject) => {
             this.db.all<Noticia>(sql, [], (err, rows) => {

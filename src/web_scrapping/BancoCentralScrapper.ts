@@ -13,7 +13,7 @@ export class BancoCentralScrapper extends NoticiaScrapper {
             return [];
         }
 
-        const { browser, page } = await this.createPageBrowser();
+        const { browser, page } = await this.createPageBrowser({});
 
         const baseUrl = 'https://www.bcb.gov.br';
         const response = await page.goto(baseUrl + '/noticiasporano?ano=' + ano);

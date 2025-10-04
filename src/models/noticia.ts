@@ -8,4 +8,4 @@ export type Noticia = {
 }
 
 
-export type OrigemNoticia = "Banco Central"
+export type OrigemNoticia = "Banco Central" | "B3"

@@ -2,6 +2,9 @@ import { Noticia } from "../models/Noticia.js";
 import puppeteer from "puppeteer";
 
 type Selector = Promise<puppeteer.ElementHandle<Element>> | HTMLElement | HTMLElement[] | NodeListOf<Element> | Element | Element[] | null;
+type CreatePageBrowserParams = {
+    headless?: boolean
+};
 
 export abstract class NoticiaScrapper {
     abstract buscarNoticias(): Promise<Noticia[]>;
@@ -32,17 +35,12 @@ export abstract class NoticiaScrapper {
         return select;
     }
 
-    async createPageBrowser() {
+    async createPageBrowser({ headless = true }: CreatePageBrowserParams): Promise<{ page: puppeteer.Page, browser: puppeteer.Browser }> {
+        
         const browser = await puppeteer.launch({
-            headless: true  
+            headless: headless
         });
-    
-        const page = await this.createPage(browser);
-    
-        return { page, browser };
-    }
 
-    async createPage(browser: puppeteer.Browser): Promise<puppeteer.Page> {
         const page = await browser.newPage();
         page.on('console', (msg) => {
             switch (msg.type()) {
@@ -54,7 +52,7 @@ export abstract class NoticiaScrapper {
                 default: console.log(`Unknown console message type: ${msg.type()} - ${msg.text}}`);
             }
         });
-    
-        return page;
+
+        return { page, browser };
     }
 }

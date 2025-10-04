@@ -2,6 +2,7 @@ import express from 'express';
 import { NoticiasRepo } from './repo/NoticiasRepo.js';
 import { NoticiasSQLLiteRepo } from "./repo/NoticiasSQLLiteRepo.js";
 import { asyncErrorHandler, globalErrorHandler } from './error/errorHandling.js';
+import { BancoCentralScrapper } from './web_scrapping/BancoCentralScrapper.js';
 
 const noticiasRepo: NoticiasRepo = new NoticiasSQLLiteRepo();
 
@@ -15,6 +16,15 @@ app.use(express.json({
 app.route('/noticias')
     .get(asyncErrorHandler(async (_, res) => {
         const noticias = await noticiasRepo.getNoticiasDaSemana();
+        res.json(noticias);
+    }));
+
+app.route('/scrap')
+    .post(asyncErrorHandler(async (req, res) => {
+        const bacenScrapper = new BancoCentralScrapper();
+
+        const noticias = await bacenScrapper.buscarNoticias();
+
         res.json(noticias);
     }));
 
