@@ -7,8 +7,8 @@
   "scripts": {
     "test": "npx tsc -b && node --test",
     "build": "tsc",
-    "start": "npx tsc -b && node dist/src/index.js",
-    "dev": "npx tsc -w && node --watch dist/src/index.js"
+    "start": "npx tsc -b && node dist/index.js",
+    "dev": "concurrently \"npx tsc -w\" \"node --watch dist/index.js\" --names tsc,node --kill-others"
   },
   "author": "Felipe Ribeiro",
   "license": "ISC",
@@ -21,6 +21,9 @@
   "devDependencies": {
     "@types/express": "^5.0.3",
     "@types/puppeteer": "^7.0.4",
+    "concurrently": "^9.2.1",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
   }
 }
