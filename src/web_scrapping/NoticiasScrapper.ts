@@ -44,11 +44,11 @@ export abstract class NoticiaScrapper {
         const page = await browser.newPage();
         page.on('console', (msg) => {
             switch (msg.type()) {
-                case 'log': console.log(`PAGE CONSOLE: ${msg.text()}`); break;
-                case 'error': console.error(`PAGE CONSOLE: ${msg.text()}`); break;
-                case 'warn': console.warn(`PAGE CONSOLE: ${msg.text()}`); break;
-                case 'info': console.info(`PAGE CONSOLE: ${msg.text()}`); break;
-                case 'debug': console.debug(`PAGE CONSOLE: ${msg.text()}`); break;
+                case 'log': console.log(`[INFO] PAGE CONSOLE: ${msg.text()}`); break;
+                case 'error': console.error(`[ERRRO] PAGE CONSOLE: ${msg.text()}`); break;
+                case 'warn': console.warn(`[WARN] PAGE CONSOLE: ${msg.text()}`); break;
+                case 'info': console.info(`[INFO] PAGE CONSOLE: ${msg.text()}`); break;
+                case 'debug': console.debug(`[DEBUG] PAGE CONSOLE: ${msg.text()}`); break;
                 default: console.log(`Unknown console message type: ${msg.type()} - ${msg.text}}`);
             }
         });
