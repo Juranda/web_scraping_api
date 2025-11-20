@@ -7,7 +7,7 @@ export class BancoCentralScrapper extends NoticiaScrapper {
 
         return this.lerNoticiasDoAno(year);
     }
-
+    
     public async lerNoticiasDoAno(ano: number): Promise<Noticia[]> {
         if (ano < 2016 && ano > new Date().getFullYear()) {
             return [];
