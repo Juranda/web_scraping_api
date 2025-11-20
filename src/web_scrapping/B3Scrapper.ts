@@ -3,16 +3,18 @@ import { Noticia } from "../models/Noticia.js";
 import { NoticiaScrapper } from "./NoticiasScrapper.js";
 
 export class B3Scrapper extends NoticiaScrapper {
+    private readonly BASE_URL = "https://www.b3.com.br/pt_br/noticias/";
+
     public async buscarNoticias(): Promise<Noticia[]> {
         const noticias: Noticia[] = [];
         const { page, browser } = await this.createPageBrowser({
             headless: false
         });
-        const baseUrl = "https://www.b3.com.br/pt_br/noticias/";
+
         let currentPage = 1;
         let nextPageAnchor: ElementHandle<HTMLAnchorElement> | null = null;
-        
-        const response = await page.goto(baseUrl);
+
+        const response = await page.goto(this.BASE_URL);
 
         if (!response?.ok()) {
             console.error("Ocorreu um erro ao tentar entrar no site da B3. status #%d content: ", response?.status(), await response?.content());
@@ -21,28 +23,29 @@ export class B3Scrapper extends NoticiaScrapper {
         }
 
         while (nextPageAnchor || currentPage === 1) {
+            nextPageAnchor = null;
             console.log("Escaniando a pagina " + currentPage);
             const pagination = await page.waitForSelector("ul.pagination", {
                 timeout: 5000
             });
-            
-            if(pagination === null) {
+
+            if (pagination === null) {
                 console.error("Pagination nao foi encontrado dentro do timeout");
                 break;
             }
 
             const as = await pagination.$$('a');
 
-            for(const a of as) {
+            for (const a of as) {
                 const aNumber = await a.evaluate(el => {
                     try {
                         return Number.parseInt(el.innerText);
-                    } catch(err) {
+                    } catch (err) {
                         return -1;
                     }
                 });
 
-                if(aNumber === currentPage + 1) {
+                if (aNumber === currentPage + 1) {
                     nextPageAnchor = a;
                 }
             }
@@ -88,14 +91,14 @@ export class B3Scrapper extends NoticiaScrapper {
             }
 
             currentPage++;
-
             const url = await nextPageAnchor?.evaluate(el => el.href);
-            
-            if(url === undefined) {
+
+            if (!url) {
                 break;
             }
 
-            await page.goto(url);
+            console.log('Indo para a proxima página')
+            await page.evaluate(url.replace('javascript:', ''));
         }
         console.log("As paginas acabaram!")
 
